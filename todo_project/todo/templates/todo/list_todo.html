@@ -1,0 +1,45 @@
+{% extends 'home/base.html' %}
+{% load static %}
+{% block content %}
+      <div class="container">
+        {% if object_list %}
+        <div class="cont_home corrent_flex-start">
+          <h1>Список задач</h1>
+
+          <div class="todos">
+            {% for todo in object_list %}
+            <div class="todo {% if todo.important %} todo_important {% endif %}">
+              <div class="">
+                <a href="{% url 'todo:status_todo' todo.id %}" class='cont_button button_margin button_ready'
+                   style="{% if todo.status %} opacity: 1 {% else %} # {% endif %}"
+                   title="{% if todo.status %}Отменить выполнение {% else %} Выполнить {% endif %}">
+                  &#10003;
+                </a>
+                <a href="{% url 'todo:update_todo' todo.id %}" class='todo_text'>
+                  <b>{{ todo.title|truncatechars:40 }}</b> - {{ todo.description|truncatechars:25  }}
+                </a>
+              </div>
+              <a href="{% url 'todo:deleted_todo' todo.id %}">
+                <img src="{% static '/img/trash.png' %}"  title="Удалить" width="20" height="20">
+              </a>
+            </div>
+            {% endfor %}
+
+          </div>
+        </div>
+        {% else %}
+
+            <div class="cont_home corrent_flex-start">
+              <h1>Список пока пуст </h1>
+              {% if title == 'Список задач' %}
+              <h2>Похоже, у вас нет задач! Хорошая работа.</h2>
+              {% else %}
+              <h2>Похоже, у вас нет выполненых задач...</h2>
+              {% endif %}
+              <a href="{% url 'todo:create_todo' %}" role="button" class='cont_button'>Создать задачу</a>
+            </div>
+
+        {% endif %}
+      </div>
+
+{% endblock %}

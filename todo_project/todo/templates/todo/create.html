@@ -1,0 +1,35 @@
+{% extends 'home/base.html' %}
+
+{% block content %}
+<div class="cont_home corrent_flex-start">
+        <div class="">
+          <h2> Новая задача </h2>
+        </div>
+
+        <div class="">
+
+          <form class="" action="{% url 'todo:create_todo' %}" method="post">
+            {% csrf_token %}
+            <div class="form_create">
+              <label for="title">Название задачи</label>
+              <input type="text" name="title" id="title" class='title_form'>
+            </div>
+
+            <div class="form_create">
+              <label for="description">Описание задачи</label>
+              <textarea name="description" id="description" class='title_form memo'></textarea>
+            </div>
+
+            <div class="">
+              <input type="checkbox" name="important" id="important">
+              <label for="important">Важное дело!!!</label>
+            </div>
+
+            <button type="submit" name="button" class='cont_button'>Сохранить</button>
+
+          </form>
+
+
+        </div>
+      </div>
+{% endblock %}

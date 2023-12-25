@@ -1,6 +1,0 @@
-.idea/
-
-.flake8
-.env
-*.sqlite3
-venv/
