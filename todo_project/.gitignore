@@ -1,0 +1,5 @@
+/.idea/
+.env
+/venv/
+/db/*.sqlite3
+.flake8
