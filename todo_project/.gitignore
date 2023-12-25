@@ -1,7 +1,6 @@
 /.idea/
-/venv/
 
-
-*.sqlite3
 .flake8
 .env
+*.sqlite3
+/venv/
