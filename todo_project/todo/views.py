@@ -1,4 +1,5 @@
-from django.shortcuts import HttpResponseRedirect
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import HttpResponseRedirect, redirect
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic.list import ListView
@@ -50,26 +51,42 @@ class TodoUpdateView(UpdateView):
     form_class = TodoForm
     success_url = reverse_lazy('todo:list_todo')
 
+    def get(self, request, *args, **kwargs):
+        if check_user(request, kwargs['pk']):
+            return super(TodoUpdateView, self).get(request, *args, **kwargs)
+        else:
+            return redirect('home')
+
     def get_context_data(self, **kwargs):
         context = super(TodoUpdateView, self).get_context_data()
         context['title'] = self.object.title
-        context['todo'] = self.object
         return context
 
 
+@login_required
 def todo_deleted(request, todo_id):
-    todo = Todo.objects.get(id=todo_id)
-    todo.delete()
-
-    return HttpResponseRedirect(request.META['HTTP_REFERER'])
-
-
-def todo_update_status(request, todo_id):
-    todo = Todo.objects.get(id=todo_id)
-    if todo.status == 1:
-        todo.status = 0
+    todo = check_user(request, todo_id)
+    if todo is False:
+        return redirect('home')
     else:
-        todo.status = 1
-    todo.save()
+        todo.delete()
+        return HttpResponseRedirect(request.META['HTTP_REFERER'])
 
-    return HttpResponseRedirect(request.META['HTTP_REFERER'])
+
+@login_required
+def todo_update_status(request, todo_id):
+    todo = check_user(request, todo_id)
+    if todo is False:
+        return redirect('home')
+    else:
+        todo.status = 0 if todo.status == 1 else 1
+        todo.save()
+        return HttpResponseRedirect(request.META['HTTP_REFERER'])
+
+
+def check_user(request, todo_id):
+    todo = Todo.objects.filter(id=todo_id)
+    if todo.exists() and request.user == todo.first().user:
+        return todo.first()
+    else:
+        return False

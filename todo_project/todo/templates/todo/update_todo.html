@@ -2,36 +2,35 @@
 
 {% block content %}
 <div class="cont_home corrent_flex-start">
-        <div class="">
-          <h2> New Todo </h2>
-        </div>
+    <div class="">
+        <h2> Изменить задачу </h2>
+    </div>
 
-        <div class="">
+    <div class="">
 
-          <form class="" action="{% url 'todo:update_todo' todo.id %}" method="post">
+        <form class="" action="{% url 'todo:update_todo' todo.id %}" method="post">
             {% csrf_token %}
             <div class="form_create">
-              <label for="title">Название задачи</label>
-              <input type="text" name="title" value="{{todo.title}}" id="title" class='title_form'>
+                <label for="title">Название задачи</label>
+                <input type="text" name="title" value="{{todo.title}}" id="title" class='title_form'>
             </div>
 
             <div class="form_create">
-              <label for="description">Описание</label>
-              <textarea name="description" class='title_form memo' id="description">{{ todo.description }}</textarea>
+                <label for="description">Описание</label>
+                <textarea name="description" class='title_form memo' id="description">{{ todo.description }}</textarea>
             </div>
 
             <div class="">
-              <input type="checkbox" name="important" value="{{ todo.description }}" id="important">
-              <label for="important">Важность!!!!</label>
+                <input type="checkbox" name="important" value="{{ todo.description }}" id="important">
+                <label for="important">Важность!!!!</label>
             </div>
 
-              <button type="submit" name="button" class='cont_button'>Сохранить</button>
+            <button type="submit" name="button" class='cont_button'>Сохранить</button>
 
 
+        </form>
 
-          </form>
 
-
-        </div>
-      </div>
+    </div>
+</div>
 {% endblock %}
