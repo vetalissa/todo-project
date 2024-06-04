@@ -39,6 +39,11 @@
                 <li>
                     <a href="{% url 'user:logout' %}" class='header_link'>Выйти</a>
                 </li>
+                {% if user.is_superuser or user.is_staff %}
+                <li>
+                    <a href="{% url 'admin:index' %}" class='header_link'> Админ-панель </a>
+                </li>
+                {% endif %}
                 {% else %}
                 <li>
                     <a href="{% url 'user:registration' %}" class='header_link'>Регистрация</a>

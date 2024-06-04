@@ -1,10 +1,12 @@
 from django.contrib import admin
+from django.contrib.auth.models import User
 
-from todo.models import Todo
+from todo.admin import TodoLineAdmin
+
+admin.site.unregister(User)
 
 
-@admin.register(Todo)
-class TodoAdmin(admin.ModelAdmin):
-    list_display = ('user', 'title', 'status')
-    fields = ('title', 'description', ('status', 'date_create', 'user'))
-    readonly_fields = ('date_create', 'user')
+@admin.register(User)
+class TodoUserAdmin(admin.ModelAdmin):
+    list_display = ('username',)
+    inlines = (TodoLineAdmin,)
