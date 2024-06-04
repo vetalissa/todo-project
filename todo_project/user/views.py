@@ -1,12 +1,9 @@
-from django.urls import reverse_lazy
 from django.contrib.auth import login
-
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.models import User
-
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-
-from django.views.generic.edit import CreateView
 from django.contrib.auth.views import LoginView
+from django.urls import reverse_lazy
+from django.views.generic.edit import CreateView
 
 from common.views import TitleMixin
 

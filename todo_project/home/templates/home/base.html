@@ -1,60 +1,60 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="rus" dir="ltr">
-  <head>
+<head>
     <meta charset="utf-8">
-    {% load static %}
-    <link rel="stylesheet" href="{% static '/css/style1.css' %}">
-    <link rel="stylesheet" href="{% static '/css/setting_css.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style1.css' %}">
+    <link rel="stylesheet" href="{% static 'css/setting_css.css' %}">
 
-    <link rel="icon" type='img/png' href="{% static '/img/logo.png' %}">
+    <link rel="icon" type='img/png' href="{% static 'img/logo.png' %}">
     <title> {{ title }} </title>
-  </head>
-  <body>
-    <div class="container">
-      <div class="header headre_flex">
+</head>
+<body>
+<div class="container">
+    <div class="header headre_flex">
 
         <div class="header_logo headre_flex">
-          <img src="{% static '/img/logo.png' %}" alt="" width="30" height="30" style="margin: 10px;">
-          <span class="logo_text"> Listok </span>
+            <img src="{% static '/img/logo.png' %}" alt="" width="30" height="30" style="margin: 10px;">
+            <span class="logo_text"> Listok </span>
         </div>
 
         <div class="header_menu headre_flex">
 
-          <ul class="headre_flex">
-            {% if user.is_authenticated %}
-            <li>
-              <a href="{% url 'todo:list_todo' %}" class="header_link"> Cписок задач </a>
-            </li>
-            <li>
-              <a href="{% url 'todo:list_ready' %}" class="header_link"> Завершенные задачи </a>
-            </li>
-            <li>
-              <a href="{% url 'todo:create_todo' %}" class="header_link"> Создать </a>
-            </li>
-            {% endif %}
-          </ul>
+            <ul class="headre_flex">
+                {% if user.is_authenticated %}
+                <li>
+                    <a href="{% url 'todo:list_todo' %}" class="header_link"> Cписок задач </a>
+                </li>
+                <li>
+                    <a href="{% url 'todo:list_ready' %}" class="header_link"> Завершенные задачи </a>
+                </li>
+                <li>
+                    <a href="{% url 'todo:create_todo' %}" class="header_link"> Создать </a>
+                </li>
+                {% endif %}
+            </ul>
 
-          <ul class="headre_flex">
-            {% if user.is_authenticated %}
-            <li>
-              <a href="{% url 'user:logout' %}" class='header_link'>Выйти</a>
-            </li>
-            {% else %}
-            <li>
-              <a href="{% url 'user:registration' %}" class='header_link'>Регистрация</a>
-            </li>
-            <li>
-              <a href="{% url 'user:login' %}" class='header_link'>Войти</a>
-            </li>
-            {% endif %}
-          </ul>
+            <ul class="headre_flex">
+                {% if user.is_authenticated %}
+                <li>
+                    <a href="{% url 'user:logout' %}" class='header_link'>Выйти</a>
+                </li>
+                {% else %}
+                <li>
+                    <a href="{% url 'user:registration' %}" class='header_link'>Регистрация</a>
+                </li>
+                <li>
+                    <a href="{% url 'user:login' %}" class='header_link'>Войти</a>
+                </li>
+                {% endif %}
+            </ul>
 
         </div>
-      </div>
     </div>
+</div>
 
-    <div class="container">
-      {% block content %} {% endblock %}
-    </div>
-  </body>
+<div class="container">
+    {% block content %} {% endblock %}
+</div>
+</body>
 </html>

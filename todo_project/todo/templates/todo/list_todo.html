@@ -28,7 +28,6 @@
           </div>
         </div>
         {% else %}
-
             <div class="cont_home corrent_flex-start">
               <h1>Список пока пуст </h1>
               {% if title == 'Список задач' %}
@@ -38,7 +37,6 @@
               {% endif %}
               <a href="{% url 'todo:create_todo' %}" role="button" class='cont_button'>Создать задачу</a>
             </div>
-
         {% endif %}
       </div>
 

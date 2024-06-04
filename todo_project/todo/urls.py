@@ -1,7 +1,7 @@
 from django.urls import path
 
-from todo.views import TodoCreateView, TodoListView, TodoCompletedListView, TodoUpdateView, todo_update_status, \
-    todo_deleted
+from todo.views import (TodoCompletedListView, TodoCreateView, TodoListView,
+                        TodoUpdateView, todo_deleted, todo_update_status)
 
 app_name = 'todo'
 

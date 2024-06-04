@@ -1,12 +1,11 @@
 from django.shortcuts import HttpResponseRedirect
 from django.urls import reverse_lazy
-
-from django.views.generic.list import ListView
 from django.views.generic.edit import CreateView, UpdateView
+from django.views.generic.list import ListView
 
-from todo.models import Todo
-from todo.forms import TodoForm
 from common.views import TitleMixin
+from todo.forms import TodoForm
+from todo.models import Todo
 
 
 class TodoCreateView(TitleMixin, CreateView):
@@ -26,7 +25,7 @@ class TodoList(TitleMixin, ListView):
     template_name = 'todo/list_todo.html'
     title = 'Список задач'
     queryset = Todo.objects.all()
-    ordering = ('-date_create')
+    ordering = ('-date_create',)
 
 
 class TodoListView(TodoList):

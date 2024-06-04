@@ -1,6 +1,5 @@
-from django.db import models
-
 from django.contrib.auth.models import User
+from django.db import models
 
 
 class Todo(models.Model):
@@ -8,7 +7,7 @@ class Todo(models.Model):
     READY = 1
     STATUSES = (
         (NOT_READY, 'Не выполнено'),
-        (READY, 'Выполненно'),
+        (READY, 'Выполнено'),
     )
 
     title = models.CharField(max_length=100)
